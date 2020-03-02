@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 
+
 const RegForm = styled.div `
     width: 300px;
     height: 300px;
@@ -56,7 +57,7 @@ const RegisterForm = props => {
                 <div>
                 <Labels htmlFor="email">
                     email {" "}
-                    <RegInput id="email" type="text" name="email" onChange={handleChange} value={user.email} />
+                    <RegInput id="email" type="email" name="email" onChange={handleChange} value={user.email} />
                 </Labels>
                 </div>
                 <br />
