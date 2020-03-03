@@ -6,19 +6,13 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-<<<<<<< HEAD
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "react-hook-form": "^4.10.1",
-    "react-scripts": "3.4.0",
-    "styled-components": "^5.0.1"
-=======
     "axios": "^0.19.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-hook-form": "^4.10.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0"
->>>>>>> bedeb365bdd025f174a26b5f1edada0941f91733
+    "react-scripts": "3.4.0",
+    "styled-components": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
