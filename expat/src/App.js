@@ -5,6 +5,7 @@ import Login from './components/Login';
 import PrivateRoute from './utils/PrivateRoute';
 import Profile from './components/Profile';
 import Header from './components/Header';
+import DashBoard from './components/Dashboard';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
   {/* <li><Link to="/header">Header</Link></li> */}
 
       </Switch>  
+      <DashBoard/>
     </div>
   );
 }
