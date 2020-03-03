@@ -10,10 +10,13 @@ export default function Login(props) {
     const handleChange=event=>{
         setLogin({...login, [event.target.name]: event.target.value})
     }
+    const signOut = ( ) => {
+        window.localStorage.removeItem('token');
+    }
 
     const handleSubmit=(event)=>{
         event.preventDefault()
-        axiosWithAuth().post('https://expath.herokuapp.com/api/paths/placeholder', login)
+        axiosWithAuth().post('https://expath.herokuapp.com/api/auth/login', login)
         .then(response=>{
             console.log('response',response)
             localStorage.setItem('token', response.data.payload)
@@ -43,6 +46,7 @@ export default function Login(props) {
             className="input"
           />
           <button className='login-button'>Login</button>
+          <button className='signout-button'onClick={signOut}>Sign Out</button>
         </form>
         </div>
     )
