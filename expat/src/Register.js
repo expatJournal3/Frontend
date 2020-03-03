@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-
+import { useForm } from 'react-hook-form';
 
 const RegForm = styled.div `
     width: 300px;
@@ -37,41 +37,73 @@ const RegisterForm = props => {
         //console.log(user);
     };
 
-    const sendUser = e => {
-        e.preventDefault();
-        props.addNewUser(user);
+    const {register, handleSubmit, errors} = useForm();
+
+    const onSubmit = data => {
+        console.log(data);
         setUser({ name: "", email: "", password: "" });
-    };
+    }
 
     return (
-        <RegForm>
-            <H2>Register</H2>
-            <form onSubmit={sendUser}>
-                <div>
-                <Labels htmlFor="name">
-                    name {" "}
-                    <RegInput id="name" type="text" name="name" onChange={handleChange} value={user.name} />
-                </Labels>
-                </div>
-                <br />
-                <div>
-                <Labels htmlFor="email">
-                    email {" "}
-                    <RegInput id="email" type="email" name="email" onChange={handleChange} value={user.email} />
-                </Labels>
-                </div>
-                <br />
-                <div>
-                <Labels htmlFor="password">
-                    password {" "}
-                    <RegInput id="password" type="password" name="password" onChange={handleChange} value={user.password} />
-                </Labels>
-                </div>
-                <br />
-                <button type="submit">Register!</button>
-            </form>
-        </RegForm>
+      <RegForm>
+        <H2>Register</H2>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <Labels htmlFor="name">
+              name{" "}
+              <RegInput
+                id="name"
+                type="text"
+                name="name"
+                ref={register({ required: true })}
+                onChange={handleChange}
+                value={user.name}
+              />
+              {errors.name && <p>This field is required!</p>}
+            </Labels>
+          </div>
+          <br />
+          <div>
+            <Labels htmlFor="email">
+              email{" "}
+              <RegInput
+                id="email"
+                type="email"
+                name="email"
+                ref={register({ required: true })}
+                onChange={handleChange}
+                value={user.email}
+              />
+              {errors.email && <p>This field is required!</p>}
+            </Labels>
+          </div>
+          <br />
+          <div>
+            <Labels htmlFor="password">
+              password{" "}
+              <RegInput
+                id="password"
+                type="password"
+                name="password"
+                ref={register({ required: true, minLength: 5 })}
+                onChange={handleChange}
+                value={user.password}
+              />
+              {errors.password && (<p>This field is required!</p>)}
+              {errors.password && errors.password.type === "minLength" && (<p>This field requires a minimum length of 5 characters!</p>)}
+            </Labels>
+          </div>
+          <br />
+          <button type="submit">Register!</button>
+        </form>
+      </RegForm>
     );
 };
 
 export default RegisterForm;
+
+  // const sendUser = e => {
+    //     e.preventDefault();
+    //     props.addNewUser(user);
+        // setUser({ name: "", email: "", password: "" });
+    // };
