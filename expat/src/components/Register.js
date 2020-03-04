@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 
 const RegForm = styled.div `
@@ -53,6 +54,8 @@ const RegisterForm = props => {
     }
 
     return (
+      <div>
+      <div><Link to="/login">Click here to Login</Link></div>
       <RegForm>
         <H2>Register</H2>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -91,6 +94,7 @@ const RegisterForm = props => {
           <button type="submit">Register!</button>
         </form>
       </RegForm>
+      </div>
     );
 };
 
