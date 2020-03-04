@@ -20,7 +20,8 @@ export default function Login(props) {
         axiosWithAuth().post('https://expath.herokuapp.com/api/auth/login', login)
         .then(response=>{
             console.log('response',response)
-            localStorage.setItem('token', response.data.payload)
+            console.log("Token",response.data.token)
+            localStorage.setItem('token', response.data.token)
             props.history.push('/dashboard');
         })
         .catch(error=>console.log('This is an error',error))

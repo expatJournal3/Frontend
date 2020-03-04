@@ -1,6 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import {axiosWithAuth} from '../utils/axiosWithAuth';  
+import styled from 'styled-components';
 
+const DashDiv= styled.div`
+width: 25%;
+height: auto;
+margin: 0 auto;
+border: 2px solid black;
+margin-bottom: 20px;
+p{
+    font-size: 0.7rem;
+    font-weight: 750;
+}
+
+img {
+    width: 100%;
+}
+`;
 
 
 
@@ -21,12 +38,15 @@ const Dashboard = () =>{
     return (
     
     <div> 
+        <Link to='/profile'>Profile Page</Link>
         {users.map(user=>{
             return(
-                <div>
-                    <p>test</p>
-                    <p>{user.email}</p>
-                </div>
+                <DashDiv key={user.id}>
+                    <p>{user.title}</p>
+                    <p>{user.body}</p>
+                    <img src={user.imgUrl} alt=""/>
+                    <p>{user.timestamp}</p>
+                </DashDiv>
             )
         })}
     </div>
