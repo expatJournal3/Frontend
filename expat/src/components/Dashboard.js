@@ -38,7 +38,7 @@ const Dashboard = () =>{
     return (
     
     <div> 
-        <Link to='/profile'>Profile Page</Link>
+        <Link to='/profile'>Back to Profile Page</Link>
         {users.map(user=>{
             return(
                 <DashDiv key={user.id}>
