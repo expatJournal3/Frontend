@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 
+
 export default function Login(props) {
    
     const [login, setLogin]=useState({
-        username:'',
+        email:'',
         password:''
     })
     const handleChange=event=>{
@@ -20,7 +21,7 @@ export default function Login(props) {
         .then(response=>{
             console.log('response',response)
             localStorage.setItem('token', response.data.payload)
-            props.history.push('/');
+            props.history.push('/dashboard');
         })
         .catch(error=>console.log('This is an error',error))
     }
@@ -31,9 +32,9 @@ export default function Login(props) {
             <form onSubmit={handleSubmit}>
           <input
             type="text"
-            name="username"
-            placeholder="username"
-            value={login.username}
+            name="email"
+            placeholder="email"
+            value={login.email}
             onChange={handleChange}
             className="input"
           />

@@ -3,13 +3,17 @@ import {axiosWithAuth} from '../utils/axiosWithAuth';
 
 
 
+
+
 const Dashboard = () =>{
     const [users, setUsers]=useState([]);
+    
+
     useEffect(()=>{
         axiosWithAuth()
-        .get('https://expath.herokuapp.com/api/paths/placeholder')
+        .get(`https://expath.herokuapp.com/api/paths`)
         .then(response =>{
-            console.log(response.data)
+            console.log('User data',response.data)
             setUsers(response.data)
         })
         .catch(error => console.log('Get users error',error))
@@ -20,7 +24,7 @@ const Dashboard = () =>{
         {users.map(user=>{
             return(
                 <div>
-
+                    <p>{user.email}</p>
                 </div>
             )
         })}

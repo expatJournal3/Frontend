@@ -27,7 +27,7 @@ function App() {
     <div className="App">
       <RegisterForm addNewUser={addNewUser} />
     <Switch>
-        <PrivateRoute exact path='/profile' component={Profile}/>
+        <PrivateRoute exact path='/dashboard' component={DashBoard}/>
         <Route exact path="/login" component={Login} />
         <Route exact path="/header" component={Header} />
         
@@ -35,6 +35,7 @@ function App() {
   {/* <li><Link to="/header">Header</Link></li> */}
 
       </Switch>  
+      <Profile/>
       <DashBoard/>
     </div>
   );
