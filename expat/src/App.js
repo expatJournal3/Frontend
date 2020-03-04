@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import RegisterForm from "./Register";
+import RegisterForm from "./components/Register";
 import { Route, Switch, Link } from "react-router-dom";
 import './App.css';
 import Login from './components/Login';
