@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 const RegForm = styled.div `
     width: 300px;
@@ -26,7 +27,6 @@ const RegInput = styled.input `
 
 const RegisterForm = props => {
     const [user, setUser] = useState({
-        name: "",
         email: "",
         password: ""
     });
@@ -41,27 +41,21 @@ const RegisterForm = props => {
 
     const onSubmit = data => {
         console.log(data);
-        setUser({ name: "", email: "", password: "" });
+        setUser({ email: "", password: "" });
+        axios
+          .post("https://expath.herokuapp.com/api/auth/register", user)
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => {
+            console.log("sorrey", error);
+          });     
     }
 
     return (
       <RegForm>
         <H2>Register</H2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <Labels htmlFor="name">
-              name{" "}
-              <RegInput
-                id="name"
-                type="text"
-                name="name"
-                ref={register({ required: true })}
-                onChange={handleChange}
-                value={user.name}
-              />
-              {errors.name && <p>This field is required!</p>}
-            </Labels>
-          </div>
           <br />
           <div>
             <Labels htmlFor="email">
@@ -101,9 +95,3 @@ const RegisterForm = props => {
 };
 
 export default RegisterForm;
-
-  // const sendUser = e => {
-    //     e.preventDefault();
-    //     props.addNewUser(user);
-        // setUser({ name: "", email: "", password: "" });
-    // };
