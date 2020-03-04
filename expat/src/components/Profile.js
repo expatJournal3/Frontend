@@ -2,26 +2,33 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import  styled  from "styled-components";
+import Header from "./Header";
 
-const ProfileDiv=styled.div`
-display: flex;
-flex-direction: column;
+const ProfileDiv = styled.div`
+  display: flex;
+  flex-direction: column;
 
-form{
+  form {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    width: 40%;   
-}
-textarea{
+    width: 40%;
+  }
+  textarea {
     height: 150px;
     margin-top: 20px;
-}
-button{
+  }
+  button {
     width: 25%;
     margin: 0 auto;
     margin-top: 20px;
-}
+  }
+  h1 {
+    color: #1978a5;
+  }
+  h2 {
+    color: #1978a5;
+  }
 `;
  
 
@@ -46,13 +53,13 @@ const [newPost, setNewPost]=useState([]);
     return (
         
     <ProfileDiv> 
-        <Link to="/dashboard">Back to Dashboard</Link>
+        <Header />
+        <h1>Profile</h1>
          <form onSubmit={handleSubmit}>
           <textarea type="text" id="search"  onChange={handleChange} placeholder="Tell your story here"></textarea>
-          
           <button className='addStory-button'>Add Story</button>
-          {/* <button className='signout-button'onClick={signOut}>Sign Out</button> */}
           </form> 
+        <h2>Your Posts</h2>
     </ProfileDiv>
     
     )}; 
