@@ -11,7 +11,7 @@ const Dashboard = () =>{
 
     useEffect(()=>{
         axiosWithAuth()
-        .get(`https://expath.herokuapp.com/api/paths`)
+        .get('https://expath.herokuapp.com/api/paths')
         .then(response =>{
             console.log('User data',response.data)
             setUsers(response.data)
@@ -24,6 +24,7 @@ const Dashboard = () =>{
         {users.map(user=>{
             return(
                 <div>
+                    <p>test</p>
                     <p>{user.email}</p>
                 </div>
             )
