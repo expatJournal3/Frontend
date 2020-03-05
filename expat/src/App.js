@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import RegisterForm from "./components/Register";
 import { Route, Switch, Link } from "react-router-dom";
 import './App.css';
@@ -11,21 +11,8 @@ import DashBoard from './components/Dashboard';
 
 function App() {
 
-  const [users, setUsers] = useState([]);
-
-  const addNewUser = user => {
-    const newUser = {
-      name: user.name,
-      email: user.email,
-      password: user.password
-    };
-    setUsers([...users, newUser]);
-    console.log(newUser);
-  }
-
   return (
     <div className="App">
-      {/* <RegisterForm addNewUser={addNewUser} /> */}
     <Switch>
         <PrivateRoute exact path='/dashboard' component={DashBoard}/>
         <PrivateRoute exact path='/profile' component={Profile}/>

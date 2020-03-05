@@ -12,10 +12,14 @@ const RegForm = styled.div `
     border: 2px dashed #05716c;
     padding: 2%;
     flex-direction: column;
+    margin: 2%;
 `
-const Labels = styled.label `
-    color: #05716c;
+const Container = styled.div `
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
+
 const H2 = styled.h2 `
     font-size: 1.8rem;
     color: #05716c;
@@ -47,6 +51,7 @@ const RegisterForm = props => {
           .post("https://expath.herokuapp.com/api/auth/register", user)
           .then(response => {
             console.log(response);
+            props.history.push('/dashboard');
           })
           .catch(error => {
             console.log("sorrey", error);
@@ -55,45 +60,47 @@ const RegisterForm = props => {
 
     return (
       <div>
-      <div><Link to="/login">Click here to Login</Link></div>
-      <RegForm>
-        <H2>Register</H2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <br />
-          <div>
-            <Labels htmlFor="email">
-              email{" "}
-              <RegInput
-                id="email"
-                type="email"
-                name="email"
-                ref={register({ required: true })}
-                onChange={handleChange}
-                value={user.email}
-              />
-              {errors.email && <p>This field is required!</p>}
-            </Labels>
-          </div>
-          <br />
-          <div>
-            <Labels htmlFor="password">
-              password{" "}
-              <RegInput
-                id="password"
-                type="password"
-                name="password"
-                ref={register({ required: true, minLength: 5 })}
-                onChange={handleChange}
-                value={user.password}
-              />
-              {errors.password && (<p>This field is required!</p>)}
-              {errors.password && errors.password.type === "minLength" && (<p>This field requires a minimum length of 5 characters!</p>)}
-            </Labels>
-          </div>
-          <br />
-          <button type="submit">Register!</button>
-        </form>
-      </RegForm>
+        <Container>
+          <RegForm>
+            <H2>Register</H2>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <br />
+              <div>
+                <RegInput
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="email"
+                  ref={register({ required: true })}
+                  onChange={handleChange}
+                  value={user.email}
+                />
+                {errors.email && <p>This field is required!</p>}
+              </div>
+              <br />
+              <div>
+                <RegInput
+                  id="password"
+                  type="password"
+                  name="password"
+                  placeholder="password"
+                  ref={register({ required: true, minLength: 5 })}
+                  onChange={handleChange}
+                  value={user.password}
+                />
+                {errors.password && <p>This field is required!</p>}
+                {errors.password && errors.password.type === "minLength" && (
+                  <p>This field requires a minimum length of 5 characters!</p>
+                )}
+              </div>
+              <br />
+              <button type="submit">Sign Up!</button>
+            </form>
+          </RegForm>
+        </Container>
+        <div>
+          <Link to="/login">Already have an account? Log In</Link>
+        </div>
       </div>
     );
 };
