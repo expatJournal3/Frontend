@@ -125,7 +125,7 @@ const saveEdit = (e) => {
         <p>{newPost.body}</p>
     </div>
     <div className="title-story-div">
-    {myStories.map(story=>{
+    {myStories.reverse().map(story=>{
         return(
             <div key={cuid()}>
                 <p>{story.title}</p>
