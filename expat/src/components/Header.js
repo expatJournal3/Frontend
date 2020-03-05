@@ -16,6 +16,7 @@ export default function Header() {
     
     const signOut = () => {
       window.localStorage.removeItem("token");
+      
     };
     
 

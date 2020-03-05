@@ -42,7 +42,7 @@ export default function Login(props) {
         event.preventDefault()
         axiosWithAuth().post('https://expath.herokuapp.com/api/auth/login', login)
         .then(response=>{
-            console.log('response',response)
+            console.log('login response',response)
             console.log("Token",response.data.token)
             localStorage.setItem('token', response.data.token)
             localStorage.setItem('id', response.data.id)
