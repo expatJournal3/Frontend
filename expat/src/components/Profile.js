@@ -40,17 +40,22 @@ const initialPost = {
 const Profile = () =>{
 const [newPost, setNewPost]=useState(initialPost);
 const [myStories, setMyStories]=useState([]);
-const id = window.localStorage.getItem("id");
+const [editing, setEditing] = useState(false);
+const userid = window.localStorage.getItem("id");
+const editStory = color => {
+    setEditing(true);
+    setNewPost(color);
+  };
 
 useEffect(()=>{
     axiosWithAuth()
-    .get(`https://expath.herokuapp.com/api/users/${id}/paths`)
+    .get(`https://expath.herokuapp.com/api/users/${userid}/paths`, myStories)
     .then(response=>{
-        console.log("My Profile page",response.data)
+        console.log("My posts",response.data)
         setMyStories(response.data)
     })
     .catch(error=>console.log('My profile error', error))
-},[id])
+},[userid])
 
 
 
@@ -60,16 +65,40 @@ useEffect(()=>{
 
     const handleSubmit=(event)=>{
         event.preventDefault();
+        console.log(newPost)
     axiosWithAuth()
-    .post(`https://expath.herokuapp.com/api/users/${id}/paths`,newPost)
+    .post(`https://expath.herokuapp.com/api/users/${userid}/paths`,newPost)
     .then(response=>{
         console.log('Profile page',response) 
         setNewPost(response.data)
+        window.location.reload()
        
     })
     .catch(error=>console.log('Create post error',error))
     
 }
+const deletePost = (id) =>{
+    axiosWithAuth()
+    .delete(`https://expath.herokuapp.com/api/users/${userid}/paths/${id}`)
+    .then(response=>{
+        console.log('Response from delete', response.data)
+        window.location.reload()
+    })
+    .catch(error=>console.log('Delete Error',error))
+}
+const saveEdit = (id) => {
+    id.preventDefault();
+    axiosWithAuth()
+      .put(`https://expath.herokuapp.com/api/users/${userid}/paths/${id}`, newPost)
+      .then(response => {
+        console.log(response.data);
+        setNewPost(response.data)
+        setEditing(false);
+      })
+      .catch(error => {
+        console.log(`error with PUT ${error.response}`);
+      });
+  };
    
     return (
         <div className="story-container">
@@ -86,19 +115,51 @@ useEffect(()=>{
         <h2>Your Posts</h2>
     </ProfileDiv>
     <div key={cuid()}>
-        <p>{newPost.story}</p>
-        <p></p>
+        <p>{newPost.title}</p>
+        <p>{newPost.body}</p>
     </div>
-    {/* <div className="title-story-div">
+    <div className="title-story-div">
     {myStories.map(story=>{
         return(
             <div key={cuid()}>
                 <p>{story.title}</p>
                 <p>{story.body}</p>
+                <button className='delete-button'onClick={()=>deletePost(story.id)}>Delete Story</button>
+                <button className='edit-button'onClick={()=>editStory(story.id)}>Edit Story</button>
             </div>
         )
     })}
-    </div> */}
+    </div>
+    {editing && (
+        <form onSubmit={saveEdit}>
+          <legend>edit story</legend>
+          <label>
+            Title name:
+            <input
+              onChange={e =>
+                setNewPost({ ...newPost, title: e.target.value })
+              }
+              value={newPost.title}
+            />
+          </label>
+          <label>
+            My Story:
+            <input
+              onChange={e =>
+                setNewPost({
+                  ...newPost,
+                  body: e.target.value 
+                })
+              }
+              value={newPost.body}
+            />
+          </label>
+          <div className="button-row">
+            <button type="submit">save</button>
+            <button onClick={() => setEditing(false)}>cancel</button>
+          </div>
+        </form>
+      )}
     </div>
     
     )}; 
