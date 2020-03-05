@@ -45,6 +45,7 @@ export default function Login(props) {
             console.log('response',response)
             console.log("Token",response.data.token)
             localStorage.setItem('token', response.data.token)
+            localStorage.setItem('id', response.data.id)
             props.history.push('/dashboard');
         })
         .catch(error=>console.log('This is an error',error))
