@@ -79,7 +79,6 @@ export default function Login(props) {
             </div>
             <br />
             <button className="login-button">Log In</button>
-            {/* <button className='signout-button'onClick={signOut}>Sign Out</button> */}
           </form>
         </RegForm>
       </Container>

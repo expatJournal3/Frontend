@@ -42,3 +42,7 @@
   color: #1978a5;
   margin: 2%;
 }
+
+body {
+    background: linear-gradient(to right, rgb(240, 247, 246), #1978A5);
+}
