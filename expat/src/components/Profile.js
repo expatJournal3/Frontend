@@ -99,6 +99,7 @@ const saveEdit = (e) => {
         console.log(response.data);
         setNewPost(response.data)
         setEditing(false);
+        window.location.reload()
       })
       .catch(error => {
         console.log(`error with PUT ${error.response}`);
