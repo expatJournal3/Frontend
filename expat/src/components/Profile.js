@@ -161,7 +161,7 @@ const saveEdit = (e) => {
             />
           </label>
           <div className="button-row">
-            <button type="submit">save</button>
+            <button type="submit" >save</button>
             <button onClick={() => setEditing(false)}>cancel</button>
           </div>
         </form>
