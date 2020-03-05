@@ -3,6 +3,7 @@ import { axiosWithAuth } from '../utils/axiosWithAuth';
 import  styled  from "styled-components";
 import Header from "./Header";
 import cuid from 'cuid';
+import {useParms, useParams} from 'react-router-dom';
 
 const ProfileDiv = styled.div`
   display: flex;
@@ -42,9 +43,11 @@ const [newPost, setNewPost]=useState(initialPost);
 const [myStories, setMyStories]=useState([]);
 const [editing, setEditing] = useState(false);
 const userid = window.localStorage.getItem("id");
-const editStory = color => {
+
+
+const editStory = story => {
     setEditing(true);
-    setNewPost(color);
+    setNewPost(story);
   };
 
 useEffect(()=>{
@@ -86,10 +89,12 @@ const deletePost = (id) =>{
     })
     .catch(error=>console.log('Delete Error',error))
 }
-const saveEdit = (id) => {
-    id.preventDefault();
+const saveEdit = (e) => {
+    
+    e.preventDefault();
+    console.log('Save edit',newPost)
     axiosWithAuth()
-      .put(`https://expath.herokuapp.com/api/users/${userid}/paths/${id}`, newPost)
+      .put(`https://expath.herokuapp.com/api/users/${userid}/paths/${newPost.id}`, newPost)
       .then(response => {
         console.log(response.data);
         setNewPost(response.data)
@@ -125,7 +130,7 @@ const saveEdit = (id) => {
                 <p>{story.title}</p>
                 <p>{story.body}</p>
                 <button className='delete-button'onClick={()=>deletePost(story.id)}>Delete Story</button>
-                <button className='edit-button'onClick={()=>editStory(story.id)}>Edit Story</button>
+                <button className='edit-button'onClick={()=>editStory(story)}>Edit Story</button>
             </div>
         )
     })}
@@ -134,7 +139,7 @@ const saveEdit = (id) => {
         <form onSubmit={saveEdit}>
           <legend>edit story</legend>
           <label>
-            Title name:
+            Change Title:
             <input
               onChange={e =>
                 setNewPost({ ...newPost, title: e.target.value })
@@ -143,7 +148,7 @@ const saveEdit = (id) => {
             />
           </label>
           <label>
-            My Story:
+            Change Story:
             <input
               onChange={e =>
                 setNewPost({
