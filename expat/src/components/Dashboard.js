@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
 import {axiosWithAuth} from '../utils/axiosWithAuth';  
 import styled from 'styled-components';
 import Header from "./Header";
@@ -35,7 +34,7 @@ const Dashboard = () =>{
         axiosWithAuth()
         .get('https://expath.herokuapp.com/api/paths')
         .then(response =>{
-            console.log('User data',response.data)
+            console.log('Get everyones data',response.data)
             setUsers(response.data)
         })
         .catch(error => console.log('Get users error',error))
