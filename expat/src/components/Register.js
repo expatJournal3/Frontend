@@ -51,7 +51,7 @@ const RegisterForm = props => {
           .post("https://expath.herokuapp.com/api/auth/register", user)
           .then(response => {
             console.log(response);
-            props.history.push('/dashboard');
+            props.history.push('/login');
           })
           .catch(error => {
             console.log("sorrey", error);
