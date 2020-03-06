@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import  styled  from "styled-components";
 import Header from "./Header";
 import cuid from 'cuid';
-import {useParms, useParams} from 'react-router-dom';
+
 
 const ProfileDiv = styled.div`
   display: flex;
@@ -34,11 +34,11 @@ const ProfileDiv = styled.div`
 const initialPost = {
     title:'',
     body:''
-    // imgUrl:'',
-    // timestamp:''
+    
 }
 
 const Profile = () =>{
+    
 const [newPost, setNewPost]=useState(initialPost);
 const [myStories, setMyStories]=useState([]);
 const [editing, setEditing] = useState(false);

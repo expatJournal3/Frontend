@@ -42,18 +42,20 @@ const Dashboard = () =>{
     return (
     
     <div> 
-        <Header />
+        <Header id="top" />
         <H1>Dashboard</H1>
         {users.map(user=>{
             return(
-                <DashDiv key={user.id}>
+                <DashDiv  key={user.id}>
                     <p>{user.title}</p>
                     <p>{user.body}</p>
                     <img src={user.imgUrl} alt=""/>
                     <p>{user.timestamp}</p>
                 </DashDiv>
+                
             )
         })}
+        <a href="#top">Back to top</a>
     </div>
     )}; 
     export default Dashboard
